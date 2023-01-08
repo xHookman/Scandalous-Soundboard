@@ -1,4 +1,4 @@
-package xhookman.cursedmod.soundboard;
+package xhookman.soundboard.soundboard;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -14,6 +14,8 @@ import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Hashtable;
+
+import static xhookman.soundboard.Soundboard.MOD_ID;
 
 public class SoundboardClient {
     private final KeyBinding keyJ, key0;
@@ -33,13 +35,13 @@ public class SoundboardClient {
                 "Open soundboard", // The translation key of the keybinding's name
                 InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
                 GLFW.GLFW_KEY_J, // The keycode of the key
-                "category.cursedmod.sound" // The translation key of the keybinding's category.
+                "category." + MOD_ID + ".sound" // The translation key of the keybinding's category.
         ));
         key0 = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "Stop sound", // The translation key of the keybinding's name
                 InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
                 GLFW.GLFW_KEY_KP_0, // The keycode of the key
-                "category.cursedmod.sound" // The translation key of the keybinding's category.
+                "category." + MOD_ID + ".sound" // The translation key of the keybinding's category.
         ));
         sounds= SoundboardServer.getSoundHashtable();
     }

@@ -1,11 +1,11 @@
-package xhookman.cursedmod.soundboard;
+package xhookman.soundboard.soundboard;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
-import static xhookman.cursedmod.Cursedmod.MOD_ID;
+import static xhookman.soundboard.Soundboard.MOD_ID;
 
 public class SoundJsonUtils {
     private static int soundsCount;
@@ -30,7 +30,7 @@ public class SoundJsonUtils {
 
                 content.append("\"").append(fileName).append("\": {\n")
                         .append("    \"sounds\": [\n")
-                        .append("      \"cursedmod:").append(fileName).append("\"\n")
+                        .append("      \""+ MOD_ID + ":").append(fileName).append("\"\n")
                         .append("    ]\n");
 
                 if (i + 1 < files.length)

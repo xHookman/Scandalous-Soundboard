@@ -1,4 +1,4 @@
-package xhookman.cursedmod.soundboard;
+package xhookman.soundboard.soundboard;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.sound.SoundCategory;
@@ -8,7 +8,7 @@ import net.minecraft.util.registry.Registry;
 import java.util.Hashtable;
 
 import static net.fabricmc.fabric.impl.transfer.TransferApiImpl.LOGGER;
-import static xhookman.cursedmod.Cursedmod.MOD_ID;
+import static xhookman.soundboard.Soundboard.MOD_ID;
 
 public class SoundboardServer {
     private static final Hashtable<Identifier, SoundEvent> sounds = new Hashtable<>();

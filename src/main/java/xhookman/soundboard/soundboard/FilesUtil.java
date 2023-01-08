@@ -1,6 +1,6 @@
-package xhookman.cursedmod.soundboard;
+package xhookman.soundboard.soundboard;
 
-import xhookman.cursedmod.ModLauncher;
+import xhookman.soundboard.ModLauncher;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -12,7 +12,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 
-import static xhookman.cursedmod.soundboard.SoundJsonUtils.generateSoundsJson;
+import static xhookman.soundboard.Soundboard.MOD_ID;
+import static xhookman.soundboard.soundboard.SoundJsonUtils.generateSoundsJson;
 
 public class FilesUtil {
     private static File soundboardDir;
@@ -70,8 +71,7 @@ public class FilesUtil {
                 // If the entry is the file you want to add, don't copy it
                 // from the original .jar. Instead, add it to the new .jar
                 // using the addFile() method
-                if (!entry.getName().startsWith("assets/cursedmod/sounds/") || !entry.getName().equals("assets/cursedmod/sounds.json")) {
-
+                if (!entry.getName().startsWith("assets/"+ MOD_ID + "/sounds/") && !entry.getName().equals("assets/" + MOD_ID + "/sounds.json")) { // erreur si je genere le mod deux fois
                     // copy the entry from the original .jar to the new .jar
                     jos.putNextEntry(new JarEntry(entry.getName()));
                     InputStream is = originalJar.getInputStream(entry);
@@ -80,6 +80,8 @@ public class FilesUtil {
                     while ((bytesRead = is.read(buffer)) != -1) {
                         jos.write(buffer, 0, bytesRead);
                     }
+                    //System.out.println("Copie de " + entry.getName());
+
                     is.close();
                 }
             }
@@ -87,10 +89,12 @@ public class FilesUtil {
             File[] soundsFiles = soundboardDir.listFiles();
 
             for(int i=0; i<files.length; i++)
-                if(files[i].getName().endsWith(".ogg"))
-                    addFile(jos, "assets/cursedmod/sounds/" + soundsFiles[i].getName(), soundboardDir.getPath() + "/" + soundsFiles[i].getName());
-
-            SoundJsonUtils.addFile(jos, "assets/cursedmod/sounds.json", generateSoundsJson(folder));
+                if(files[i].getName().endsWith(".ogg")) {
+                    addFile(jos, "assets/" + MOD_ID + "/sounds/" + soundsFiles[i].getName(), soundboardDir.getPath() + "/" + soundsFiles[i].getName());
+                    System.out.println("Copie du son " + soundsFiles[i].getName());
+                }
+            System.out.println("Copie du fichier sounds.json");
+            SoundJsonUtils.addFile(jos, "assets/" + MOD_ID + "/sounds.json", generateSoundsJson(folder));
 
             // Close the streams
             originalJar.close();

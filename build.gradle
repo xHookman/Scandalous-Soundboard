@@ -27,7 +27,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'xhookman.cursedmod.ModLauncher'
+        attributes 'Main-Class': 'xhookman.soundboard.ModLauncher'
     }
 }
 

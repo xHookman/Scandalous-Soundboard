@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "cursedmod",
+  "id": "soundboard",
   "version": "${version}",
-  "name": "Cursedmod",
+  "name": "Soundboard",
   "description": "",
   "authors": [],
   "contact": {},
@@ -11,14 +11,14 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "xhookman.cursedmod.client.CursedmodClient"
+      "xhookman.soundboard.client.SoundboardClient"
     ],
     "main": [
-      "xhookman.cursedmod.Cursedmod"
+      "xhookman.soundboard.Soundboard"
     ]
   },
   "mixins": [
-    "cursedmod.mixins.json"
+    "soundboard.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.10",

@@ -1,4 +1,4 @@
-package xhookman.cursedmod.soundboard;
+package xhookman.soundboard.soundboard;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.sound.SoundEvent;

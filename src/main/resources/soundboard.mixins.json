@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "xhookman.cursedmod.mixin",
+  "package": "xhookman.soundboard.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
   ],

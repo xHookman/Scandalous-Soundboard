@@ -1,13 +1,13 @@
-package xhookman.cursedmod;
+package xhookman.soundboard;
 
-import xhookman.cursedmod.soundboard.FilesUtil;
+import xhookman.soundboard.soundboard.FilesUtil;
 import javax.swing.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import static xhookman.cursedmod.soundboard.FilesUtil.*;
+import static xhookman.soundboard.soundboard.FilesUtil.*;
 
 public class ModLauncher {
 
