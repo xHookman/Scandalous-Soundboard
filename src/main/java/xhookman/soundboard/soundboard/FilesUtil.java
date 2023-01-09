@@ -32,7 +32,7 @@ public class FilesUtil {
     }
 
     public static void createFiles(){
-        soundboardDir = new File("soundboard/");
+        soundboardDir = new File(getJarParentPath() + "/soundboard/");
         if (!soundboardDir.exists()) {
             soundboardDir.mkdir();
         }
@@ -105,7 +105,14 @@ public class FilesUtil {
     }
 
     public static String getJarPath() {
-        return ModLauncher.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+        return ModLauncher.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    }
+
+    public static String getJarParentPath() {
+        return new File(getJarPath()).getParent();
+    }
+    public static String getWindowsPath(String path) {
+        return path.substring(1).replace('/', '\\');
     }
 
     public static String getNewJarName() {

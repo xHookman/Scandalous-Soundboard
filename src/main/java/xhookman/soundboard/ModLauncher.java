@@ -2,37 +2,21 @@ package xhookman.soundboard;
 
 import xhookman.soundboard.soundboard.FilesUtil;
 import javax.swing.*;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import static xhookman.soundboard.soundboard.FilesUtil.*;
 
 public class ModLauncher {
 
-    private static void removeJar(){ // The batch is launched after 2 seconds
-        // Create a bat file to remove the jar
+    private static void removeJar(){ // The file is removed after 2 seconds
         try {
-            File batFile = new File("deleteJar.bat");
-            String batContent =
-                    "del \"" + getJarPath().substring(getJarPath().lastIndexOf("/")+1) + "\"\n" +
-                            "rename " + getNewJarName() + " " + getJarPath().substring(getJarPath().lastIndexOf("/")+1) + "\n" +
-                            "del \"deleteJar.bat\"";
-            InputStream is = new ByteArrayInputStream(batContent.getBytes());
-            OutputStream os = new java.io.FileOutputStream(batFile);
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = is.read(buffer)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-            is.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // Executing batch
-        try {
-            ProcessBuilder pb = new ProcessBuilder("powershell", "-Command", "Start-Sleep -Seconds 2; Start-Process -FilePath 'deleteJar.bat'"); // Obliged because Windows 11 is trash and doing it with a cmd does not work
+            String jarName = getJarPath().substring(getJarPath().lastIndexOf("/")+1);
+            String command = "Start-Sleep -Seconds 2;Remove-Item -Path '"+ jarName + "' -Force;" +
+                    "Rename-Item " + getNewJarName() + " " + getJarPath().substring(getJarPath().lastIndexOf("/")+1);
+           // ProcessBuilder pb = new ProcessBuilder("powershell", "-Command", "Start-Sleep -Seconds 2; Start-Process -FilePath 'deleteJar.bat'"); // Obliged because Windows 11 is trash and doing it with a cmd does not work
+           // ProcessBuilder pb = new ProcessBuilder("powershell -Command Start-Sleep -Seconds 2;Remove-Item -Path '"+ getWindowsJarPath() + "' -Force"); // Obliged because Windows 11 is trash and doing it with a cmd does not work
+            ProcessBuilder pb = new ProcessBuilder("powershell", "-Command", command); // Obliged because Windows 11 is trash and doing it with a cmd does not work
+            pb.directory(new File(getJarPath()).getParentFile());
             System.out.println("Deleting jar...");
             pb.start();
         } catch (Exception e) {

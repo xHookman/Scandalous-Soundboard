@@ -10,15 +10,19 @@ import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
+import java.io.File;
 import java.util.Hashtable;
 
 import static xhookman.soundboard.Soundboard.MOD_ID;
 
 public class SoundboardClient {
     private final KeyBinding keyJ, key0;
+    private boolean showFilesChangeMsg = true;
     PositionedSoundInstance sound;
 
     protected Hashtable<Identifier, SoundEvent> sounds;
@@ -44,6 +48,11 @@ public class SoundboardClient {
                 "category." + MOD_ID + ".sound" // The translation key of the keybinding's category.
         ));
         sounds= SoundboardServer.getSoundHashtable();
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            playSoundWhenKeyPressed();
+            checkFilesChange(client);
+        });
     }
     protected void playSound(Identifier soundId){
         sound = PositionedSoundInstance.master(sounds.get(soundId), 1.0F);
@@ -65,7 +74,6 @@ public class SoundboardClient {
     }
 
     public void playSoundWhenKeyPressed(){
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
             //get key at index 0 from sounds
             int i = 0;
             for(Identifier soundId : sounds.keySet()){
@@ -81,6 +89,24 @@ public class SoundboardClient {
             while (key0.wasPressed()) {
                 stopSound();
             }
-        });
+    }
+
+    // send a message when player joined the world
+    private void checkFilesChange(MinecraftClient client){
+        if(!showFilesChangeMsg) return;
+        if(client.player!=null && client.world!=null) {
+            showFilesChangeMsg = false;
+            if (sounds.size() == 0) {
+                client.player.sendMessage(Text.of("No sound found. Please run the mod file to update the sounds"), false);
+            } else {
+                for (String soundFileName : SoundJsonUtils.getSoundsName()) {
+                    File file = new File(FilesUtil.getDir(),soundFileName+".ogg");
+                    if(!file.exists()){
+                        client.player.sendMessage(Text.literal("Warning : you have new sounds that have not been added to the soundboard. Run the mod file to update").formatted(Formatting.RED), false);
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

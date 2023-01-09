@@ -16,7 +16,6 @@ public class SoundboardClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         LOGGER.info("Je suis le client !!! (" + MOD_ID + " est chargé)");
-        xhookman.soundboard.soundboard.SoundboardClient soundboard = new xhookman.soundboard.soundboard.SoundboardClient();
-        soundboard.playSoundWhenKeyPressed();
+        new xhookman.soundboard.soundboard.SoundboardClient();
     }
 }
