@@ -45,7 +45,8 @@ to generate these files (it works on Linux but it's generally a bad idea).
 I may be could use Mixin but I do not have the skill for the moment, this is 
 my first mod for Minecraft.
 
-It's working like a virus but it's a simple soundboard, the used way is scandalous.
+It's a simple soundboard, the used way is just scandalous.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
