@@ -3,7 +3,7 @@
 
 A scandalous soundboard compatible with Fabric for Minecraft 1.19.2 client and server side !
 
-Explanation :
+## Explanation :
 
 - Copy the jar in your mods folder
 - Create a new folder named "Soundboard" (it will be automatically created)
