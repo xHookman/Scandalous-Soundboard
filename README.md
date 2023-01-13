@@ -11,14 +11,14 @@ A scandalous soundboard compatible with Fabric for Minecraft 1.19.2 client and s
 - Run the jar (double click on it) to update the sounds
 - Launch Minecraft!
 
-For server :
+### For server :
 
 - Follow the steps above
 - Just share your generated jar file to your friends
 - Copy directly the jar file on your server
 - Launch your server and enjoy!
 
-Keys : 
+### Keys : 
 
 J : open the soundboard menu
 
