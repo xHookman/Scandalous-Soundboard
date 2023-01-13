@@ -1,22 +1,29 @@
 
 # Scandalous Soundboard
 
-A scandalous soundboard compatible with Fabric for Minecraft 1.19.2 client and server side !
-
-Explanation :
+A scandalous soundboard compatible with Fabric for Minecraft 1.19.2 client and server side !Explanation :
 
 - Copy the jar in your mods folder
 - Create a new folder named "Soundboard" (it will be automatically created)
 - Put your ogg sounds in this folder
 - Run the jar (double click on it) to update the sounds
-- Launch Minecraft !
+- Launch Minecraft!
+
+For server :
+
+- Follow the steps above
+- Just share your generated jar file to your friends
+- Copy directly the jar file on your server
+- Launch your server and enjoy!
 
 Keys : 
-J to open the soundboard menu
 
-Numpad to play the sounds
+J : open the soundboard menu
 
-Numpad 0 to stop the playing sound
+Numpad keys : play the sounds
+
+Numpad 0 : stop the playing sound
+
 ## Run Locally
 
 You can run the jar file using command line too :
@@ -37,3 +44,6 @@ I may be could use Mixin but I do not have the skill for the moment, this is
 my first mod for Minecraft.
 
 It's working like a virus but it's a simple soundboard, the used way is scandalous.
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
