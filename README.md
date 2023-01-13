@@ -1,7 +1,7 @@
 
 # Scandalous Soundboard
 
-A scandalous soundboard compatible with Fabric for Minecraft 1.19.2 client and server side !
+A scandalous soundboard compatible with Fabric for Minecraft 1.19.2 client and server side!
 
 ## Explanation :
 
