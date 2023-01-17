@@ -1,5 +1,7 @@
 package xhookman.soundboard.soundboard;
 
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
 import xhookman.soundboard.ModLauncher;
 
 import java.io.*;
@@ -26,6 +28,17 @@ public class FilesUtil {
                 System.out.println("Ajout de " + soundFileName);
                 if (!file.getName().matches("[a-z0-9_]")) {
                     file.renameTo(new File(dir, soundFileName.replaceAll("[^a-z0-9_]+", "")+".ogg"));
+                }
+            } else {
+                try {
+
+                    AudioFile f = AudioFileIO.read(file); // I hate this library
+                    f.getFile().renameTo(new File(dir, file.getName().replaceAll("[^a-z0-9_]+", "")+".ogg"));
+                    System.out.println("Converting " + file.getName() + " to ogg...");
+                    AudioFileIO.write(f);
+                } catch (Exception e) {
+                    System.out.println("Could not convert " + file.getName() + " :(");
+                    e.printStackTrace();
                 }
             }
         }
