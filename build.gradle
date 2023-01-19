@@ -26,12 +26,6 @@ dependencies {
     implementation 'net.jthink:jaudiotagger:3.0.1'
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'xhookman.soundboard.ModLauncher'
-    }
-}
-
 processResources {
     inputs.property "version", project.version
     filteringCharset "UTF-8"
