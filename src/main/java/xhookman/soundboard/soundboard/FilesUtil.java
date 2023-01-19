@@ -26,19 +26,20 @@ public class FilesUtil {
             if(file.getName().endsWith(".ogg")) {
                 String soundFileName = file.getName().split(".ogg")[0];
                 System.out.println("Ajout de " + soundFileName);
-                if (!file.getName().matches("[a-z0-9_]")) {
-                    file.renameTo(new File(dir, soundFileName.replaceAll("[^a-z0-9_]+", "")+".ogg"));
+                if (!file.getName().matches("[a-zA-Z0-9_]")) {
+                    file.renameTo(new File(dir, soundFileName.replaceAll("[^a-zA-Z0-9_]+", "")+".ogg"));
                 }
             } else {
                 try {
-
                     AudioFile f = AudioFileIO.read(file); // I hate this library
-                    f.getFile().renameTo(new File(dir, file.getName().replaceAll("[^a-z0-9_]+", "")+".ogg"));
+                    if (!file.getName().matches("[a-zA-Z0-9_]"))
+                        f.getFile().renameTo(new File(dir, file.getName().replaceAll("[^a-zA-Z0-9_]+", "_")+".ogg"));
                     System.out.println("Converting " + file.getName() + " to ogg...");
                     AudioFileIO.write(f);
+                    file.delete();
                 } catch (Exception e) {
                     System.out.println("Could not convert " + file.getName() + " :(");
-                    e.printStackTrace();
+                  //  e.printStackTrace();
                 }
             }
         }
