@@ -26,7 +26,21 @@ dependencies {
     implementation 'net.jthink:jaudiotagger:3.0.1'
 }
 
-processResources {
+jar {
+    manifest {
+        attributes ('Main-Class': 'xhookman.soundboard.ModLauncher')
+    }
+
+    /*
+          I need to do that because this library is not included by default when i simply compile with Gradle
+          I already tried to create an artifact but some fabric libraries are missing this broke my b*lls
+     */
+    into('org') {
+        from 'jaudiotagger/org'
+    }
+}
+
+    processResources {
     inputs.property "version", project.version
     filteringCharset "UTF-8"
 
