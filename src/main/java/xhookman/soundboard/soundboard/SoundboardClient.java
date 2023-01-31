@@ -100,7 +100,7 @@ public class SoundboardClient {
                 client.player.sendMessage(Text.of("No sound found. Please run the mod file to update the sounds"), false);
             } else {
                 for (String soundFileName : SoundJsonUtils.getSoundsName()) {
-                    File file = new File(FilesUtil.getDir(),soundFileName+".ogg");
+                    File file = new File(FilesUtil.getSoundboardDir(),soundFileName+".ogg");
                     if(!file.exists()){
                         client.player.sendMessage(Text.literal("Warning : you have new sounds that have not been added to the soundboard. Run the mod file to update").formatted(Formatting.RED), false);
                         return;

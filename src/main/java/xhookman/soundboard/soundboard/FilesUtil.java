@@ -1,14 +1,11 @@
 package xhookman.soundboard.soundboard;
 
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
 import xhookman.soundboard.ModLauncher;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Enumeration;
-import java.util.Objects;
 import java.util.Random;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -21,41 +18,17 @@ public class FilesUtil {
     private static File soundboardDir;
     private static String newJarName;
 
-    public static void checkFilesName(File dir){
-        for (File file : Objects.requireNonNull(dir.listFiles())) {
-            if(file.getName().endsWith(".ogg")) {
-                String soundFileName = file.getName().split(".ogg")[0];
-                System.out.println("Ajout de " + soundFileName);
-                if (!file.getName().matches("[a-z0-9_]")) {
-                    file.renameTo(new File(dir, soundFileName.replaceAll("[^a-z0-9_]+", "")+".ogg"));
-                }
-            } else {
-                try {
-                    AudioFile f = AudioFileIO.read(file); // I hate this library
-                    if (!file.getName().matches("[a-z0-9_]"))
-                        f.getFile().renameTo(new File(dir, file.getName().replaceAll("[^a-z0-9_]+", "_")+".ogg"));
-                    System.out.println("Converting " + file.getName() + " to ogg...");
-                    AudioFileIO.write(f);
-                    file.delete();
-                } catch (Exception e) {
-                    System.out.println("Could not convert " + file.getName() + " :(");
-                  //  e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public static void createFiles(){
+    public static void createSoundboardDir(){ // Create the soundboard folder
         soundboardDir = new File(getJarParentPath() + "/soundboard/");
         if (!soundboardDir.exists()) {
             soundboardDir.mkdir();
         }
     }
-    public static File getDir(){
+    public static File getSoundboardDir(){ // Get the soundboard folder
         return soundboardDir;
     }
 
-    public static void addFile(JarOutputStream jos, String name, String path) throws IOException {
+    public static void addFile(JarOutputStream jos, String name, String path) throws IOException { // Add a file to the .jar
         jos.putNextEntry(new JarEntry(name));
         InputStream is = Files.newInputStream(Paths.get(path));
         byte[] buffer = new byte[1024];
@@ -66,7 +39,7 @@ public class FilesUtil {
         is.close();
     }
 
-    public static void generateFiles(File folder) {
+    public static void generateFiles(File folder) { // Generate the new .jar file
         // Open the original .jar file for reading
         try {
             JarFile originalJar = new JarFile(getJarPath());
@@ -118,18 +91,18 @@ public class FilesUtil {
         }
     }
 
-    public static String getJarPath() {
+    public static String getJarPath() { // Get the path of the .jar file
         return ModLauncher.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 
-    public static String getJarParentPath() {
+    public static String getJarParentPath() { // Get the path of the .jar parent directory
         return new File(getJarPath()).getParent();
     }
-    public static String getWindowsPath(String path) {
+    public static String getWindowsPath(String path) { // Convert the path to a windows path
         return path.substring(1).replace('/', '\\');
     }
 
-    public static String getNewJarName() {
+    public static String getNewJarName() { // Get the name of the new .jar file
         return newJarName;
     }
 }

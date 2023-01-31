@@ -1,5 +1,6 @@
 package xhookman.soundboard;
 
+import xhookman.soundboard.soundboard.Converter;
 import xhookman.soundboard.soundboard.FilesUtil;
 import javax.swing.*;
 import java.io.File;
@@ -24,10 +25,10 @@ public class ModLauncher {
         }
     }
         public static void main(String[] args) {
-            FilesUtil.createFiles();
-            File dir = FilesUtil.getDir();
+            FilesUtil.createSoundboardDir();
+            File dir = FilesUtil.getSoundboardDir();
             System.out.println("Checking files name...");
-            checkFilesName(dir);
+            Converter.checkAndConvertFiles(dir);
             System.out.println("Generating new jar...");
             FilesUtil.generateFiles(dir);
             System.out.println("Mod updated! The old jar will be deleted 2 seconds after you close this window.");
