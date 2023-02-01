@@ -7,11 +7,6 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-    maven {
-        url 'https://repo.clojars.org'
-        name 'Clojars'
-    }
-
     // Add repositories to retrieve artifacts from in here.
     // You should only use this when depending on other mods because
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
@@ -20,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation files('xuggle-xuggler-5.4.jar')
+    implementation group: 'ws.schild', name: 'jave-all-deps', version: '3.3.1'
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
@@ -33,10 +28,13 @@ dependencies {
 }
 
 jar {
+    from "libraries/"
+    into "/"
     manifest {
         attributes ('Main-Class': 'xhookman.soundboard.ModLauncher')
     }
 }
+
 
     processResources {
     inputs.property "version", project.version
