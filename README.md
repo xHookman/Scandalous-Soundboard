@@ -2,12 +2,13 @@
 # Scandalous Soundboard
 
 A scandalous soundboard compatible with Fabric for Minecraft 1.19.2 client and server side!
+You can now directly put your audio and video files, the mod will automatically convert these files when you launch it!
 
 ## Explanation :
 
 - Copy the jar in your mods folder
 - Create a new folder named "Soundboard" (it will be automatically created)
-- Put your ogg sounds in this folder
+- Put your sounds in this folder
 - Run the jar (double click on it) to update the sounds
 - Launch Minecraft!
 
