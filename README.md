@@ -2,6 +2,7 @@
 # Scandalous Soundboard
 
 A scandalous soundboard compatible with Fabric for Minecraft 1.19.2 client and server side!
+
 You can now directly put your audio and video files, the mod will automatically convert these files when you launch it!
 
 ## Explanation :
