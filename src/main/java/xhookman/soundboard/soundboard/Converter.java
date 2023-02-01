@@ -6,7 +6,6 @@ import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.encode.AudioAttributes;
 import ws.schild.jave.encode.EncodingAttributes;
 import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
 
 public class Converter {
@@ -30,12 +29,12 @@ public class Converter {
     public static void checkAndConvertFiles(File dir){ // Check if the files are in the right format and convert them if needed
         for (File file : Objects.requireNonNull(dir.listFiles())) {
                 if (!file.getName().endsWith(".ogg")) {
-                    System.out.println("Converting " + file.getName() + " to ogg...");
+                    FilesUtil.getLogWindow().writeToLog("Converting " + file.getName() + " to ogg...");
                     try {
                         convert(file, new File(dir, getValidFileName(getFileNameWithoutExtension(file.getName())) + ".ogg"));
                         file.delete();
                     } catch (EncoderException e) {
-                        System.out.println("Could not convert " + file.getName() + " :(");
+                        FilesUtil.getLogWindow().writeToLog("Could not convert " + file.getName() + " :(");
                     }
                 } else {
                     file.renameTo(new File(dir, getValidFileName(getFileNameWithoutExtension(file.getName())) + ".ogg"));

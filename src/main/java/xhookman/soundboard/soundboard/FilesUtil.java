@@ -1,5 +1,6 @@
 package xhookman.soundboard.soundboard;
 
+import xhookman.soundboard.LogWindow;
 import xhookman.soundboard.ModLauncher;
 
 import java.io.*;
@@ -17,6 +18,15 @@ import static xhookman.soundboard.soundboard.SoundJsonUtils.generateSoundsJson;
 public class FilesUtil {
     private static File soundboardDir;
     private static String newJarName;
+    private static LogWindow logWindow;
+
+    public static void setLogWindow(LogWindow logWindow){
+        FilesUtil.logWindow = logWindow;
+    }
+
+    public static LogWindow getLogWindow(){
+        return logWindow;
+    }
 
     public static void createSoundboardDir(){ // Create the soundboard folder
         soundboardDir = new File(getJarParentPath() + "/soundboard/");
@@ -78,9 +88,9 @@ public class FilesUtil {
             for(int i=0; i<files.length; i++)
                 if(files[i].getName().endsWith(".ogg")) {
                     addFile(jos, "assets/" + MOD_ID + "/sounds/" + soundsFiles[i].getName(), soundboardDir.getPath() + "/" + soundsFiles[i].getName());
-                    System.out.println("Copie du son " + soundsFiles[i].getName());
+                    logWindow.writeToLog("Copying " + soundsFiles[i].getName());
                 }
-            System.out.println("Copie du fichier sounds.json");
+            logWindow.writeToLog("Copying sounds.json");
             SoundJsonUtils.addFile(jos, "assets/" + MOD_ID + "/sounds.json", generateSoundsJson(folder));
 
             // Close the streams
