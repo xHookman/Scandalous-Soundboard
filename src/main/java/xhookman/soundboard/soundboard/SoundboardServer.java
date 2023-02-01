@@ -21,7 +21,7 @@ public class SoundboardServer {
     }
     public SoundboardServer(){
         try {
-            FilesUtil.createFiles();
+            FilesUtil.createSoundboardDir();
             SoundJsonUtils.readSoundsJson();
         } catch (Exception e) {
             e.printStackTrace();
