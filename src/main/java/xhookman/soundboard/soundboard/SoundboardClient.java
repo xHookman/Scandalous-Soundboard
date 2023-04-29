@@ -32,7 +32,7 @@ public class SoundboardClient {
 
             for (int i = 0; i < KEY_BINDINGS.length; i++) {
                 KEY_BINDINGS[i] = KeyBindingHelper.registerKeyBinding(
-                        new KeyBinding("Play sound " + i, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_KP_1 + i, "key.category.soundboard"));
+                        new KeyBinding("Play sound " + i, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_KP_1 + i, "Soundboard"));
             }
 
         keyJ = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -98,14 +98,6 @@ public class SoundboardClient {
             showFilesChangeMsg = false;
             if (sounds.size() == 0) {
                 client.player.sendMessage(Text.of("No sound found. Please run the mod file to update the sounds"), false);
-            } else {
-                for (String soundFileName : SoundJsonUtils.getSoundsName()) {
-                    File file = new File(FilesUtil.getSoundboardDir(),soundFileName+".ogg");
-                    if(!file.exists()){
-                        client.player.sendMessage(Text.literal("Warning : you have new sounds that have not been added to the soundboard. Run the mod file to update").formatted(Formatting.RED), false);
-                        return;
-                    }
-                }
             }
         }
     }

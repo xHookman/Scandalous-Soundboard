@@ -48,7 +48,7 @@ public class SoundboardServer {
             //play sound for all players
             server.execute(() -> {
                 //get server world
-                player.world.playSoundFromEntity(player, player, sound, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                player.world.playSoundFromEntity(null, player, sound, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 //send a public message to all players
                 //server.getPlayerManager().broadcast(Text.of("Sound played by " + player.getEntityName()), false);
             });
