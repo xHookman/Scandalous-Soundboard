@@ -63,7 +63,7 @@ public class SoundboardClient {
             buf.release();
     }
 
-    private void stopSound(){
+    public void stopSound(){
         PacketByteBuf buf = PacketByteBufs.create();
         buf.retain();
         ClientPlayNetworking.send(new Identifier("stop_sound"), buf);

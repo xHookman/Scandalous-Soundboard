@@ -21,12 +21,15 @@ public class SoundboardGui extends Screen {
         int BUTTON_WIDTH = 100;
 
         Hashtable<Identifier, SoundEvent> sounds = SoundboardServer.getSoundHashtable();
-        int i = 0;
+        int i = 0, j;
 
-        //add a button for each sound
-        for(Identifier soundId : sounds.keySet()){
-            this.addDrawableChild(new ButtonWidget(10, 10+i, BUTTON_WIDTH, BUTTON_HEIGHT, Text.of(soundId.getPath()), (button) -> soundboardClient.playSound(soundId)));
+        for(j=0; j<sounds.size(); j++){
+            Identifier soundId = (Identifier) sounds.keySet().toArray()[j];
+            this.addDrawableChild(new ButtonWidget(10, 10+i, BUTTON_WIDTH, BUTTON_HEIGHT, Text.of(soundId.getPath() + " : " + (j+1)), (button) -> soundboardClient.playSound(soundId)));
             i+= BUTTON_HEIGHT;
         }
+
+        //add a button to stop sound in the bottom right corner of the screen
+        this.addDrawableChild(new ButtonWidget(this.width - BUTTON_WIDTH - 10, this.height - BUTTON_HEIGHT - 10, BUTTON_WIDTH, BUTTON_HEIGHT, Text.of("Stop sound (Key 0)"), (button) -> soundboardClient.stopSound()));
     }
 }
