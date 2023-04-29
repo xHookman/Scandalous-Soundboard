@@ -25,7 +25,6 @@ public class SoundboardGui extends Screen {
 
         //add a button for each sound
         for(Identifier soundId : sounds.keySet()){
-
             this.addDrawableChild(new ButtonWidget(10, 10+i, BUTTON_WIDTH, BUTTON_HEIGHT, Text.of(soundId.getPath()), (button) -> soundboardClient.playSound(soundId)));
             i+= BUTTON_HEIGHT;
         }

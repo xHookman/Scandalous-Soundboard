@@ -56,14 +56,11 @@ public class SoundboardClient {
     }
     protected void playSound(Identifier soundId){
         sound = PositionedSoundInstance.master(sounds.get(soundId), 1.0F);
-       // if (!client.getSoundManager().isPlaying(sound)) {
-          //  client.getSoundManager().play(sound);
             PacketByteBuf buf = PacketByteBufs.create();
             buf.writeIdentifier(soundId);
             buf.retain();
             ClientPlayNetworking.send(new Identifier("play_sound"), buf);
             buf.release();
-       // }
     }
 
     private void stopSound(){
