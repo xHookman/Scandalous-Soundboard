@@ -47,7 +47,7 @@ public class SoundboardClient {
                 GLFW.GLFW_KEY_KP_0, // The keycode of the key
                 "category." + MOD_ID + ".sound" // The translation key of the keybinding's category.
         ));
-        sounds= SoundboardServer.getSoundHashtable();
+        sounds = SoundboardServer.getSoundHashtable();
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             playSoundWhenKeyPressed();

@@ -47,12 +47,14 @@ public class SoundboardServer {
             SoundEvent sound = sounds.get(soundId);
             //play sound for all players
             server.execute(() -> {
-                player.world.playSoundFromEntity(null, player, sound, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                //get server world
+                player.world.playSoundFromEntity(player, player, sound, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 //send a public message to all players
                 //server.getPlayerManager().broadcast(Text.of("Sound played by " + player.getEntityName()), false);
             });
         });
 
-        ServerPlayNetworking.registerGlobalReceiver(new Identifier("stop_sound"), (server, player, handler, buf, responseSender) -> server.execute(() -> server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "stopsound " + player.getEntityName())));
+        ServerPlayNetworking.registerGlobalReceiver(new Identifier("stop_sound"), (server, player, handler, buf, responseSender) -> server.execute(() ->
+                server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "stopsound " + player.getEntityName())));
     }
 }

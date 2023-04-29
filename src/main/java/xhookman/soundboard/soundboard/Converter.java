@@ -20,6 +20,7 @@ public class Converter {
     private static void convert(File source, File target) throws EncoderException {
         AudioAttributes audio = new AudioAttributes();
         audio.setCodec("libvorbis");
+        audio.setChannels(1);
         EncodingAttributes attrs = new EncodingAttributes();
         attrs.setOutputFormat("ogg");
         attrs.setAudioAttributes(audio);
