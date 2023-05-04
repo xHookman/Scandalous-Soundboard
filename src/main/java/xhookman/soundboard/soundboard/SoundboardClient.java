@@ -11,11 +11,8 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
-
-import java.io.File;
 import java.util.Hashtable;
 
 import static xhookman.soundboard.Soundboard.MOD_ID;
@@ -74,8 +71,9 @@ public class SoundboardClient {
             //get key at index 0 from sounds
             int i = 0;
             for(Identifier soundId : sounds.keySet()){
+                if(i>=KEY_BINDINGS.length) break;
                 if(KEY_BINDINGS[i].wasPressed()){
-                    playSound(soundId);
+                   playSound(soundId);
                 }
                 i++;
             }

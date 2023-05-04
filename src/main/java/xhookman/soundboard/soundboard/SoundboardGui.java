@@ -10,8 +10,7 @@ import java.util.Hashtable;
 
 public class SoundboardGui extends Screen {
     private final SoundboardClient soundboardClient;
-
-    private int iPosLastBtn;
+    private ScrollableButtonListWidget buttonList;
 
     public SoundboardGui(SoundboardClient soundboardClient) {
         super(Text.of("Soundboard"));
@@ -20,28 +19,27 @@ public class SoundboardGui extends Screen {
 
     @Override
     public void init() {
+        super.init();
         int BUTTON_HEIGHT = 20;
         int BUTTON_WIDTH = 100;
         Hashtable<Identifier, SoundEvent> sounds = SoundboardServer.getSoundHashtable();
 
-
-        ScrollableButtonListWidget buttonList = new ScrollableButtonListWidget(this, MinecraftClient.getInstance(), width, height, 0, height, BUTTON_HEIGHT + 1);
+        buttonList = new ScrollableButtonListWidget(this, MinecraftClient.getInstance(), width, height, 0, height, BUTTON_HEIGHT + 1);
         buttonList.setRenderBackground(false);
+        int iPosLastBtn = 0;
 
-       /* for(iPosLastBtn=0; iPosLastBtn<sounds.size(); iPosLastBtn++){
-            Identifier soundId = (Identifier) sounds.keySet().toArray()[iPosLastBtn];
-            buttonList.addButton(new ButtonWidget(0, 0, BUTTON_WIDTH, BUTTON_HEIGHT, Text.of(soundId.getPath() + " : Key " + (iPosLastBtn + 1)),
-                    (b) -> soundboardClient.playSound(soundId)));
-        }*/
-
-        // Testing
-        for (iPosLastBtn = 0; iPosLastBtn < 30; iPosLastBtn++) {
-            buttonList.addButton(new ButtonWidget(0, 0, BUTTON_WIDTH, BUTTON_HEIGHT, Text.of("Button " + (iPosLastBtn + 1)), (b) -> System.out.println("Button " + (iPosLastBtn + 1) + " clicked")));
+        buttonList = new ScrollableButtonListWidget(this, this.client, width, height, 0, height, BUTTON_HEIGHT + 1);
+        for (Identifier soundId : sounds.keySet()) {
+            buttonList.addButton(new ButtonWidget(0, 0, BUTTON_WIDTH, BUTTON_HEIGHT,
+                    Text.of(soundId.getPath() + " : Key " + (++iPosLastBtn)),
+                    (buttonWidget) -> {
+                        soundboardClient.playSound(soundId);
+                    }));
         }
 
-        this.addDrawableChild(buttonList);
+        this.addSelectableChild(buttonList);
 
         //add a button to stop sound in the bottom right corner of the screen
-        this.addDrawableChild(new ButtonWidget(this.width - BUTTON_WIDTH - 10, this.height - BUTTON_HEIGHT - 10, BUTTON_WIDTH, BUTTON_HEIGHT, Text.of("Stop sound (Key 0)"), (button) -> soundboardClient.stopSound()));
+        this.addSelectableChild(new ButtonWidget(this.width - BUTTON_WIDTH - 10, this.height - BUTTON_HEIGHT - 10, BUTTON_WIDTH, BUTTON_HEIGHT, Text.of("Stop sound (Key 0)"), (button) -> soundboardClient.stopSound()));
     }
 }
