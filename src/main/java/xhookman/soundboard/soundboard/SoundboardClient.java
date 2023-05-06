@@ -92,7 +92,7 @@ public class SoundboardClient {
         if(client.player!=null && client.world!=null) {
             showFilesChangeMsg = false;
             if (sounds.size() == 0) {
-                client.player.sendMessage(Text.of("No sound found. Please run the mod file to update the sounds"), false);
+                client.player.sendMessage(Text.of("No sound found. Please copy your sounds in mods/soundboard folder and run the mod file to update the sounds (Please exit the game before)."), false);
             }
         }
     }
