@@ -13,6 +13,8 @@ You can now directly put your audio and video files, the mod will automatically 
 - Run the jar (double click on it) to update the sounds
 - Launch Minecraft!
 
+/!\ Do not delete your sounds so you will retrieve them if you update the mod !
+
 ### For server :
 
 - Follow the steps above
